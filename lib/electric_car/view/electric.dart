@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vintagecars/drawer/view/drawer.dart';
+
+import 'package:vintagecars/electric_details/view/electric_details.dart';
 
 class ElectricCar extends StatelessWidget {
   ElectricCar({super.key});
@@ -17,22 +18,7 @@ class ElectricCar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //drawer:  DrawerScreen(),
       backgroundColor: Colors.white,
-      // appBar: AppBar(
-      //   //automaticallyImplyLeading: false,
-      //   centerTitle: true,
-      //   backgroundColor: Colors.black,
-      //   elevation: 0,
-      //   title: Text(
-      //     'Electric Car',
-      //     style: GoogleFonts.abel(
-      //       color: Colors.white,
-      //       fontSize: 25,
-      //     ),
-      //   ),
-      //   systemOverlayStyle: SystemUiOverlayStyle.dark,
-      // ),
       body: ListView(
         children: [
           Padding(
@@ -74,56 +60,68 @@ class ElectricCar extends StatelessWidget {
                       childAspectRatio: 0.75,
                     ),
                     itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 18, bottom: 30),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            // Theme.of(context).primaryColor,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 5,
-                                spreadRadius: 1,
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute<dynamic>(
+                              builder: (context) => ElectricDetails(
+                                electricAxis: caritems[index],
                               ),
-                            ],
-                          ),
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              Image.network(
-                                caritems[index]['cars_image'].toString(),
-                                height: 100,
-                                width: 200,
-                                fit: BoxFit.cover,
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                caritems[index]['cars_name'].toString(),
-                                style: GoogleFonts.actor(fontSize: 17),
-                              ),
-                              Row(
-                                children: [
-                                  const SizedBox(
-                                    height: 70,
-                                    width: 15,
-                                  ),
-                                  const Icon(
-                                    Icons.currency_rupee,
-                                    size: 20,
-                                  ),
-                                  Text(
-                                    caritems[index]['cars_price'].toString(),
-                                    style: GoogleFonts.andadaPro(),
-                                  )
-                                ],
-                              )
-                            ],
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 18, bottom: 30),
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              // Theme.of(context).primaryColor,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 5,
+                                  spreadRadius: 1,
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                Image.network(
+                                  caritems[index]['cars_image'].toString(),
+                                  height: 100,
+                                  width: 200,
+                                  fit: BoxFit.cover,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  caritems[index]['cars_name'].toString(),
+                                  style: GoogleFonts.actor(fontSize: 17),
+                                ),
+                                Row(
+                                  children: [
+                                    const SizedBox(
+                                      height: 70,
+                                      width: 15,
+                                    ),
+                                    const Icon(
+                                      Icons.currency_rupee,
+                                      size: 20,
+                                    ),
+                                    Text(
+                                      caritems[index]['cars_price'].toString(),
+                                      style: GoogleFonts.andadaPro(),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       );

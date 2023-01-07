@@ -5,17 +5,29 @@ import 'package:vintagecars/dashboard/view/dashboard.dart';
 import 'package:vintagecars/login_page/bloc/login_bloc.dart';
 import 'package:vintagecars/register_page/register.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool _obsecuretext = true;
+  void _toggle() {
+    setState(() {
+      _obsecuretext = !_obsecuretext;
+    });
+  }
+
   TextEditingController mailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
 
   final loginbloc = LoginBloc();
 
   @override
   Widget build(BuildContext context) {
-    // ignore: use_decorated_box
     return BlocProvider(
       create: (context) => loginbloc,
       child: BlocListener<LoginBloc, LoginState>(
@@ -24,7 +36,7 @@ class LoginScreen extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute<dynamic>(
-                builder: (context) => Dashboard(),
+                builder: (context) => const Dashboard(),
               ),
             );
           } else if (state is LoginFailed) {
@@ -78,13 +90,19 @@ class LoginScreen extends StatelessWidget {
                         height: 30,
                       ),
                       TextField(
+                        obscureText: _obsecuretext,
                         controller: passwordController,
                         decoration: InputDecoration(
                           fillColor: Colors.grey.shade100,
                           filled: true,
-                          suffixIcon: const Icon(
-                            Icons.visibility,
-                            color: Color.fromARGB(255, 80, 79, 79),
+                          suffixIcon: IconButton(
+                            onPressed: _toggle,
+                            icon: Icon(
+                              _obsecuretext
+                                  ? Icons.remove_red_eye_outlined
+                                  : Icons.visibility_off,
+                              color: const Color.fromARGB(255, 80, 79, 79),
+                            ),
                           ),
                           prefixIcon: const Icon(
                             Icons.lock,

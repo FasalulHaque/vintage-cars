@@ -15,20 +15,6 @@ class UsedCar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Text(
-          'Used Car',
-          style: GoogleFonts.abel(
-            color: Colors.black,
-            fontSize: 25,
-          ),
-        ),
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
-      ),
       body: ListView(
         children: [
           Padding(

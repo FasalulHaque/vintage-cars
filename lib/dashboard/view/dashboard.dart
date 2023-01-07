@@ -1,6 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:vintagecars/drawer/view/drawer.dart';
 import 'package:vintagecars/electric_car/view/electric.dart';
 import 'package:vintagecars/favorite/view/favorite.dart';
@@ -33,9 +35,13 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       drawer: const DrawerScreen(),
       appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          title: appBarText()),
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        centerTitle: true,
+        iconTheme: const IconThemeData(color: Colors.black),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        title: appBarText(),
+      ),
       backgroundColor: Colors.deepPurple,
       body: _widgets.elementAt(_selectedindex),
       bottomNavigationBar: CurvedNavigationBar(
@@ -66,14 +72,26 @@ class _DashboardState extends State<Dashboard> {
   Text appBarText() {
     switch (_selectedindex) {
       case 0:
-        return Text('Electric');
+        return Text(
+          'Electric Car',
+          style: GoogleFonts.abel(color: Colors.black),
+        );
       case 1:
-        return Text('Favourite');
+        return Text(
+          'Favourite',
+          style: GoogleFonts.abel(color: Colors.black),
+        );
       case 2:
-        return Text('Used cars');
+        return Text(
+          'Used Car',
+          style: GoogleFonts.abel(color: Colors.black),
+        );
 
       default:
-        return Text('Cars');
+        return Text(
+          'Cars',
+          style: GoogleFonts.abel(color: Colors.black),
+        );
     }
   }
 }
