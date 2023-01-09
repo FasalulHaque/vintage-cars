@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vintagecars/drawer/view/profile.dart';
 import 'package:vintagecars/drawer/view/settings.dart';
 import 'package:vintagecars/electric_car/view/electric.dart';
 import 'package:vintagecars/used_car/view/used_car.dart';
@@ -50,6 +51,24 @@ class DrawerScreen extends StatelessWidget {
             height: 30,
           ),
           ListTile(
+            leading: const Icon(Icons.account_box),
+            title: Text(
+              'Profile',
+              style: GoogleFonts.adamina(color: Colors.black),
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute<dynamic>(
+                  builder: (context) => const ProfileScreen(),
+                ),
+              );
+            },
+          ),
+          const SizedBox(
+            height: 9,
+          ),
+          ListTile(
             leading: const Icon(Icons.favorite),
             title: Text(
               'Favorite',
@@ -60,49 +79,14 @@ class DrawerScreen extends StatelessWidget {
           const SizedBox(
             height: 9,
           ),
-          // ListTile(
-          //   leading: const Icon(FontAwesomeIcons.car),
-          //   title: Text(
-          //     'Electric Car',
-          //     style: GoogleFonts.adamina(color: Colors.black),
-          //   ),
-          //   onTap: () {},
-          // ),
-          // const SizedBox(
-          //   height: 9,
-          // ),
-          // ListTile(
-          //   leading: const Icon(FontAwesomeIcons.car),
-          //   title: Text(
-          //     'Used car',
-          //     style: GoogleFonts.adamina(color: Colors.black),
-          //   ),
-          //   onTap: () {},
-          // ),
-          // const SizedBox(
-          //   height: 9,
-          // ),
           ListTile(
-            leading: const Icon(Icons.account_box),
+            leading: const Icon(Icons.bookmarks_rounded),
             title: Text(
-              'Profile',
+              'Booking',
               style: GoogleFonts.adamina(color: Colors.black),
             ),
-            onTap: () {
-              // Navigator.push(context, MaterialPageRoute<dynamic>(builder: (context) => (context) => p,))
-            },
+            onTap: () {},
           ),
-          // const SizedBox(
-          //   height: 9,
-          // ),
-          // ListTile(
-          //   leading: const Icon(Icons.settings),
-          //   title: Text(
-          //     'Orders ',
-          //     style: GoogleFonts.adamina(color: Colors.black),
-          //   ),
-          //   onTap: () {},
-          // ),
           const SizedBox(
             height: 9,
           ),
