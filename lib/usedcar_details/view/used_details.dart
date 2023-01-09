@@ -1,18 +1,12 @@
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vintagecars/electric_details/view/bookin_electric.dart';
-import 'package:vintagecars/electric_details/view/widgets/featured_Ecard.dart';
-import 'package:vintagecars/favorite/view/favorite.dart';
+import 'package:vintagecars/usedcar_details/view/bookin_used.dart';
+import 'package:vintagecars/usedcar_details/view/featured_Uscard.dart';
 
-class ElectricDetails extends StatelessWidget {
-  ElectricDetails({super.key, required this.electricAxis});
-
-  QueryDocumentSnapshot<Object?> electricAxis;
+class UsedDetails extends StatelessWidget {
+  UsedDetails({super.key, required this.usedcAxis});
+  QueryDocumentSnapshot<Object?> usedcAxis;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +43,7 @@ class ElectricDetails extends StatelessWidget {
                 top: 20,
               ),
               child: Image.network(
-                electricAxis['cars_image'].toString(),
+                usedcAxis['cars_image'].toString(),
                 fit: BoxFit.cover,
                 height: 230,
                 width: 230,
@@ -61,7 +55,7 @@ class ElectricDetails extends StatelessWidget {
                 top: 13,
               ),
               child: Text(
-                electricAxis['cars_name'].toString(),
+                usedcAxis['cars_name'].toString(),
                 style: GoogleFonts.actor(
                   fontSize: 28,
                   fontWeight: FontWeight.w300,
@@ -105,7 +99,7 @@ class ElectricDetails extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          electricAxis['cars_price'].toString(),
+                          usedcAxis['cars_price'].toString(),
                           style: GoogleFonts.aBeeZee(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
@@ -166,56 +160,75 @@ class ElectricDetails extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               crossAxisCount: 2,
-              mainAxisSpacing: 7,
+              mainAxisSpacing: 12,
               children: <Widget>[
-                FeturedCard(
+                FeturedUsedCard(
                   text: 'Top Speed',
-                  value: electricAxis['top_speed'].toString(),
+                  value: usedcAxis['max_power'].toString(),
                   image: Image.asset(
                     'assets/image/download__1_-removebg-preview.png',
                   ),
                 ),
-                FeturedCard(
+                FeturedUsedCard(
                   text: 'Fuel Type',
-                  value: electricAxis['fuel_type'].toString(),
+                  value: usedcAxis['fuel_type'].toString(),
                   image: Image.asset(
                     'assets/image/images-removebg-preview (1).png',
                   ),
                 ),
-                FeturedCard(
+                FeturedUsedCard(
                   text: 'Transmission',
-                  value: electricAxis['transmission'].toString(),
+                  value: usedcAxis['transmission'].toString(),
                   image: Image.asset(
                     'assets/image/istockphoto-466542086-612x612-removebg-preview.png',
                   ),
                 ),
-                FeturedCard(
+                FeturedUsedCard(
                   text: 'Seating',
-                  value: electricAxis['seating_capacity'].toString(),
+                  value: usedcAxis['seating'].toString(),
                   image: Image.asset(
                     'assets/image/number-seats-grey-removebg-preview.png',
                   ),
                 ),
-                FeturedCard(
-                  text: 'Battery',
-                  value: electricAxis['battery_capacity'].toString(),
+                FeturedUsedCard(
+                  text: 'Registration',
+                  value: usedcAxis['registration'].toString(),
                   image: Image.asset(
-                    'assets/image/power-battery-2195871-1887280-removebg-preview.png',
+                    'assets/image/new_plates-removebg-preview.png',
                   ),
                 ),
-                FeturedCard(
-                  text: 'Dr Range',
-                  value: electricAxis['driving_range'].toString(),
+                FeturedUsedCard(
+                  text: 'Mileage  ',
+                  value: usedcAxis['mileage'].toString(),
                   image: Image.asset(
-                    'assets/image/rhfg-removebg-preview.png',
+                    'assets/image/fuel-gauge-icon-meter-full-tank-car-vebg-preview.png',
                   ),
                 ),
-                FeturedCard(
-                  text: 'Safety',
-                  value: electricAxis['safety'].toString(),
+                FeturedUsedCard(
+                  text: 'Insurance  ',
+                  value: usedcAxis['Insurance'].toString(),
                   image: Image.asset(
                     'assets/image/4669525-removebg-preview.png',
                   ),
+                ),
+                FeturedUsedCard(
+                  text: 'Model  ',
+                  value: usedcAxis['model'].toString(),
+                  image: Image.asset(
+                    'assets/image/red-sedan-car-icon-in-flat-design-vector-16737556-removebg-preview.png',
+                  ),
+                ),
+                FeturedUsedCard(
+                  text: 'Kilometers Driven',
+                  value: usedcAxis['kilometers_driven'].toString(),
+                  image: Image.asset(
+                    'assets/image/speedometer-icon-simple-style-isolated-vector-illustration-auto-spare-parts-symbol-81638125-removebg-preview.png',
+                  ),
+                ),
+                FeturedUsedCard(
+                  text: 'regist In',
+                  value: usedcAxis['registration_in'].toString(),
+                  image: const Icon(Icons.app_registration),
                 ),
               ],
             ),
@@ -224,8 +237,8 @@ class ElectricDetails extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute<dynamic>(
-                    builder: (context) => BookingElectric(
-                      book: electricAxis,
+                    builder: (context) => BookingUsed(
+                      book: usedcAxis,
                     ),
                   ),
                 );

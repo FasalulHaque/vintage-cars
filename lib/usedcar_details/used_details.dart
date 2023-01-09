@@ -1,0 +1,1 @@
+export 'view/used_details.dart';

@@ -81,8 +81,8 @@ class ElectricCar extends StatelessWidget {
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black26,
-                                  blurRadius: 5,
-                                  spreadRadius: 1,
+                                  blurRadius: 6,
+                                  spreadRadius: 2,
                                 ),
                               ],
                             ),

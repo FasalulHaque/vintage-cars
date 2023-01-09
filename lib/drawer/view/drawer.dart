@@ -88,7 +88,9 @@ class DrawerScreen extends StatelessWidget {
               'Profile',
               style: GoogleFonts.adamina(color: Colors.black),
             ),
-            onTap: () {},
+            onTap: () {
+              // Navigator.push(context, MaterialPageRoute<dynamic>(builder: (context) => (context) => p,))
+            },
           ),
           // const SizedBox(
           //   height: 9,

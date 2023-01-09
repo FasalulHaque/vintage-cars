@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vintagecars/usedcar_details/view/used_details.dart';
 
 class UsedCar extends StatelessWidget {
   UsedCar({super.key});
@@ -55,57 +56,68 @@ class UsedCar extends StatelessWidget {
                       childAspectRatio: 0.75,
                     ),
                     itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 18, bottom: 30),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            // Theme.of(context).primaryColor,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 5,
-                                spreadRadius: 1,
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: Image.network(
-                                  useditems[index]['cars_image'].toString(),
-                                  height: 100,
-                                  width: 200,
-
-                                  //fit: BoxFit.cover,
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute<dynamic>(
+                              builder: (context) =>
+                                  UsedDetails(usedcAxis: useditems[index]),
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 18, bottom: 30),
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              // Theme.of(context).primaryColor,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 6,
+                                  spreadRadius: 2,
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                useditems[index]['cars_name'].toString(),
-                                style: GoogleFonts.actor(fontSize: 17),
-                              ),
-                              Row(
-                                children: [
-                                  const SizedBox(
-                                    height: 70,
-                                    width: 15,
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 8),
+                                  child: Image.network(
+                                    useditems[index]['cars_image'].toString(),
+                                    height: 100,
+                                    width: 200,
+
+                                    //fit: BoxFit.cover,
                                   ),
-                                  const Icon(Icons.currency_rupee),
-                                  Text(
-                                    useditems[index]['cars_price'].toString(),
-                                    style: GoogleFonts.andadaPro(),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  useditems[index]['cars_name'].toString(),
+                                  style: GoogleFonts.actor(fontSize: 17),
+                                ),
+                                Row(
+                                  children: [
+                                    const SizedBox(
+                                      height: 70,
+                                      width: 15,
+                                    ),
+                                    const Icon(Icons.currency_rupee),
+                                    Text(
+                                      useditems[index]['cars_price'].toString(),
+                                      style: GoogleFonts.andadaPro(),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
