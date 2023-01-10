@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vintagecars/drawer/view/profile.dart';
+import 'package:vintagecars/profile/view/profile.dart';
 import 'package:vintagecars/drawer/view/settings.dart';
 import 'package:vintagecars/electric_car/view/electric.dart';
 import 'package:vintagecars/used_car/view/used_car.dart';
@@ -60,7 +60,7 @@ class DrawerScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute<dynamic>(
-                  builder: (context) => const ProfileScreen(),
+                  builder: (context) =>  ProfileScreen(),
                 ),
               );
             },

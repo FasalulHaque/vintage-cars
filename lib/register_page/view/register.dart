@@ -41,7 +41,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 context,
                 MaterialPageRoute<dynamic>(
                   builder: (context) => LoginScreen(),
-                ));
+                ),);
           } else if (state is LoginFailed) {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(state.message)));

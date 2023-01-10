@@ -2,11 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:motion_toast/motion_toast.dart';
-import 'package:motion_toast/resources/arrays.dart';
+
 import 'package:vintagecars/dashboard/view/dashboard.dart';
 import 'package:vintagecars/electric_details/bloc/booking_bloc.dart';
-import 'package:vintagecars/register_page/bloc/register_bloc.dart';
+import 'package:vintagecars/electric_details/view/widgets/nam,price.dart';
 
 class BookingElectric extends StatefulWidget {
   BookingElectric({super.key, required this.book});
@@ -26,6 +25,10 @@ List<String> payment = <String>[
   'Cash',
   'EMI',
 ];
+Map<String, dynamic> someData = {
+  'foo': 1,
+  'bar': true,
+};
 String dropdownValueP = payment.first;
 TextEditingController namecontroller = TextEditingController();
 TextEditingController placecontroller = TextEditingController();
@@ -47,36 +50,21 @@ class _BookingElectricState extends State<BookingElectric> {
                 builder: (context) => const Dashboard(),
               ),
             );
-            MotionToast.success(
-              position: MotionToastPosition.top,
-              //height: 100,
-              // barrierColor: Colors.black,
-              description: Text(
-                'Booking Confirmed',
-                style: GoogleFonts.abhayaLibre(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(
+                  'bokked',
                 ),
               ),
-              // primaryColor: Colors.red,
-              // icon: Icons.done,
-            ).show(context);
+            );
           } else if (state is BookingAddFiled) {
-            MotionToast.error(
-              position: MotionToastPosition.top,
-              //height: 100,
-              // barrierColor: Colors.black,
-              description: Text(
-                'Booking Cancelled',
-                style: GoogleFonts.abhayaLibre(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(
+                  'Booking Cancelled',
                 ),
               ),
-
-              // primaryColor: Colors.red,
-              // icon: Icons.done,
-            ).show(context);
+            );
           }
         },
         child: Scaffold(
@@ -109,44 +97,14 @@ class _BookingElectricState extends State<BookingElectric> {
               const SizedBox(
                 height: 40,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 26, right: 26),
-                child: SizedBox(
-                  height: 64,
-                  child: Card(
-                    shadowColor: Colors.redAccent,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      side: const BorderSide(
-                        color: Color.fromARGB(255, 247, 186, 182),
-
-                        //width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    color: Colors.white,
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 25,
-                            ),
-                            child: Text(
-                              // '',
-                              widget.book['cars_name'].toString(),
-                              // book['driving_range'].toString(),
-                              style: GoogleFonts.abhayaLibre(
-                                fontSize: 21,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+              autom(
+                text: widget.book['cars_name'].toString(),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              autom(
+                text: widget.book['cars_price'].toString(),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 26, right: 26, top: 10),
@@ -155,57 +113,13 @@ class _BookingElectricState extends State<BookingElectric> {
                   child: Card(
                     shadowColor: Colors.redAccent,
                     elevation: 0,
-
                     shape: RoundedRectangleBorder(
                       side: const BorderSide(
                         color: Color.fromARGB(255, 247, 186, 182),
-                        //width: 2.0,
                       ),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     color: Colors.white,
-
-                    // const Color.fromARGB(255, 210, 212, 205),
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 25,
-                            ),
-                            child: Text(
-                              widget.book['cars_price'].toString(),
-                              style: GoogleFonts.abhayaLibre(
-                                fontSize: 21,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 26, right: 26, top: 10),
-                child: SizedBox(
-                  height: 64,
-                  child: Card(
-                    shadowColor: Colors.redAccent,
-                    elevation: 0,
-
-                    shape: RoundedRectangleBorder(
-                      side: const BorderSide(
-                        color: Color.fromARGB(255, 247, 186, 182),
-
-                        //width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    color: Colors.white,
-
-                    // const Color.fromARGB(255, 210, 212, 205),
                     child: Column(
                       children: [
                         ListTile(

@@ -114,6 +114,7 @@ class ElectricCar extends StatelessWidget {
                                       Icons.currency_rupee,
                                       size: 20,
                                     ),
+                                    
                                     Text(
                                       caritems[index]['cars_price'].toString(),
                                       style: GoogleFonts.andadaPro(),

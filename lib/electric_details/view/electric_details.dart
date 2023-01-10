@@ -2,12 +2,10 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vintagecars/electric_details/view/bookin_electric.dart';
 import 'package:vintagecars/electric_details/view/widgets/featured_Ecard.dart';
-import 'package:vintagecars/favorite/view/favorite.dart';
 
 class ElectricDetails extends StatelessWidget {
   ElectricDetails({super.key, required this.electricAxis});
