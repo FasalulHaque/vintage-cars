@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vintagecars/usedcar_details/view/bookin_used.dart';
+import 'package:vintagecars/booking/view/booking.dart';
 import 'package:vintagecars/usedcar_details/view/featured_Uscard.dart';
 
 class UsedDetails extends StatelessWidget {
@@ -237,9 +237,7 @@ class UsedDetails extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute<dynamic>(
-                    builder: (context) => BookingUsed(
-                      book: usedcAxis,
-                    ),
+                    builder: (context) => BookingCars(book: usedcAxis),
                   ),
                 );
               },

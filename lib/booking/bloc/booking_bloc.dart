@@ -14,21 +14,23 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       if (event is bookingAddEvent) {
         try {
           final auth = FirebaseAuth.instance;
-          var uuid = const Uuid();
-          var bookingId = uuid.v4();
+          const uuid = Uuid();
+          final bookingId = uuid.v4();
           final booking =
               FirebaseFirestore.instance.collection('booking_collection');
           final userId = auth.currentUser!.uid;
+
           await booking.doc(bookingId).set({
             'cars_name': event.carName,
             'cars_price': event.price,
-            'user_color': '',
-            'fund': '',
+            'user_color': event.color,
+            'fund': event.fund,
             'your_name': event.yname,
             'cars_place': event.place,
             'contact_number': event.number,
-            'booking_id': bookingId,
+            'image': event.image,
             'user_id': userId,
+            'bookingId': bookingId
           });
           emit(BookingAddSucess());
         } catch (e) {

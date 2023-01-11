@@ -10,11 +10,19 @@ import 'package:vintagecars/dashboard/view/dashboard.dart';
 import 'package:vintagecars/profile/bloc/profile_bloc.dart';
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen({super.key});
+  ProfileScreen({
+    super.key,
+  });
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
+
+List<String> payment = <String>[
+  'Male',
+  'Female',
+];
+String dropdownValue = payment.first;
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final profile = FirebaseFirestore.instance.collection('profile_collection');
@@ -122,11 +130,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   StreamBuilder(
-                    stream: userRef
-                        .snapshots(),
-                    builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    stream: userRef.doc(auth.currentUser!.uid).snapshots(),
+                    builder: (context, AsyncSnapshot snapshot) {
                       if (snapshot.hasData) {
-                        final profiletems = snapshot.data!.docs;
+                        final profiletems = snapshot.data;
+                        print(profiletems['userName']);
                         return SingleChildScrollView(
                           child: Column(
                             children: [
@@ -144,9 +152,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       vertical: 18,
                                       horizontal: 10,
                                     ),
-                                    labelText:'dgs',
-                                  //  profiletems['user_name'].toString(),
-                                    labelStyle: GoogleFonts.abel(),
+                                    labelText:
+                                        profiletems['userName'].toString(),
+                                    labelStyle: GoogleFonts.adamina(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 20,
+                                    ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(20),
                                       borderSide: const BorderSide(
@@ -175,8 +186,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       vertical: 18,
                                       horizontal: 10,
                                     ),
-                                    labelText: 'Email',
-                                    labelStyle: GoogleFonts.abel(),
+                                    labelText: profiletems['email'].toString(),
+                                    labelStyle: GoogleFonts.adamina(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 20,
+                                    ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(20),
                                       borderSide: const BorderSide(
@@ -191,31 +205,57 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 20, right: 25, left: 25,),
-                                child: TextFormField(
-                                  enabled: false,
-                                  keyboardType: TextInputType.number,
-                                  controller: agecontroller,
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 18,
-                                      horizontal: 10,
+                              const SizedBox(
+                                height: 18,
+                              ),
+                              SizedBox(
+                                width: 350,
+                                child: Card(
+                                  shadowColor: Colors.redAccent,
+                                  elevation: 0,
+                                  shape: const RoundedRectangleBorder(
+                                    side: BorderSide(
+                                      color: Color.fromARGB(255, 225, 223, 223),
                                     ),
-                                    labelText: 'Age',
-                                    labelStyle: GoogleFonts.abel(),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 247, 186, 182),
-                                      ),
-                                    ),
-                                    border: const OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.grey),
-                                    ),
+                                  ),
+                                  color: Colors.white,
+                                  child: Column(
+                                    children: [
+                                      ListTile(
+                                        title: Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 6,
+                                          ),
+                                          child: DropdownButton<String>(
+                                            value: dropdownValue,
+                                            isExpanded: true,
+                                            icon: const Icon(
+                                              Icons.arrow_drop_down_sharp,
+                                              size: 30,
+                                            ),
+                                            elevation: 16,
+                                            style: GoogleFonts.abhayaLibre(
+                                              fontSize: 21,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.black,
+                                            ),
+                                            onChanged: (String? value) {
+                                              setState(() {
+                                                dropdownValue = value!;
+                                              });
+                                            },
+                                            items: payment
+                                                .map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Text(value),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
                               ),
@@ -230,7 +270,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     },
                   ),
                   Row(
-                    // mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
                         onTap: () => profilebloc.add(
@@ -239,6 +278,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             email: emailcontroller.text,
                             age: agecontroller.text,
                             image: pickedFile,
+                            gander: dropdownValue,
                           ),
                         ),
                         child: Container(

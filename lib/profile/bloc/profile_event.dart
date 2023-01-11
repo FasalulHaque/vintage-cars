@@ -9,10 +9,13 @@ class AddProfile extends ProfileEvent {
     required this.email,
     required this.age,
     required this.image,
+    required this.gander,
+    
   });
 
   Future<XFile?> image;
   String name;
   String email;
   String age;
+  String gander;
 }

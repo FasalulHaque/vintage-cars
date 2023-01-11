@@ -7,12 +7,12 @@ import 'package:vintagecars/booking/booking.dart';
 import 'package:vintagecars/dashboard/view/dashboard.dart';
 import 'package:vintagecars/electric_details/view/widgets/nam,price.dart';
 
-class BookingElectric extends StatefulWidget {
-  BookingElectric({super.key, required this.book});
+class BookingCars extends StatefulWidget {
+  BookingCars({super.key, required this.book});
 
   QueryDocumentSnapshot<Object?> book;
 
-  State<BookingElectric> createState() => _BookingElectricState();
+  State<BookingCars> createState() => _BookingCarsState();
 }
 
 List<String> list = <String>[
@@ -33,7 +33,7 @@ TextEditingController numbercontroller = TextEditingController();
 
 final bookinghbloc = BookingBloc();
 
-class _BookingElectricState extends State<BookingElectric> {
+class _BookingCarsState extends State<BookingCars> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

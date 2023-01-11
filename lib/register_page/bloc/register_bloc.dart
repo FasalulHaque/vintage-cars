@@ -24,7 +24,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
             'userName': event.userName,
             'email': event.email,
             'mobileNumber': event.mobileNumber,
-            'password': event.password
+            'password': event.password,
+            'profileImage': ''
           });
           emit(LoginSuccess());
         } on FirebaseAuthException catch (e) {

@@ -33,13 +33,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           final file = File(image.path);
           await refernce.putFile(file);
           final imagelink = await refernce.getDownloadURL();
-          await profile.doc(profileId).set({
+          await profile.doc(userId).set({
             'name': event.name,
             'email': event.email,
             'age': event.age,
             'booking_id': profileId,
             'user_id': userId,
             'image': imagelink,
+            'gander': event.gander
           });
 
           emit(ProfileAddSucess());

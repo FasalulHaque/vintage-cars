@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Settings extends StatelessWidget {
-  const Settings({super.key});
+class Settingss extends StatelessWidget {
+  const Settingss({super.key});
 
   @override
   Widget build(BuildContext context) {

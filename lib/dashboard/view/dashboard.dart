@@ -33,7 +33,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const DrawerScreen(),
+      drawer: DrawerScreen(),
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         centerTitle: true,
