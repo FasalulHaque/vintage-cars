@@ -36,8 +36,7 @@ class Settingss extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 color: const Color(0xFFF5F6F9),
-                // const Color.fromARGB(255, 210, 212, 205),
-                child: Column(  
+                child: Column(
                   children: [
                     ListTile(
                       leading: const Icon(
@@ -60,12 +59,6 @@ class Settingss extends StatelessWidget {
                   ],
                 ),
               ),
-              //   onTap: () => Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => const Notificationn(),
-              //     ),
-              //   ),
             ),
           ),
           Padding(
@@ -102,12 +95,6 @@ class Settingss extends StatelessWidget {
                   ],
                 ),
               ),
-              //   onTap: () => Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => const Notificationn(),
-              //     ),
-              //   ),
             ),
           ),
           Padding(
@@ -144,12 +131,6 @@ class Settingss extends StatelessWidget {
                   ],
                 ),
               ),
-              //   onTap: () => Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => const Notificationn(),
-              //     ),
-              //   ),
             ),
           ),
           Padding(
@@ -188,12 +169,6 @@ class Settingss extends StatelessWidget {
                   ],
                 ),
               ),
-              //   onTap: () => Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => const Notificationn(),
-              //     ),
-              //   ),
             ),
           ),
           Padding(
@@ -206,7 +181,6 @@ class Settingss extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 color: const Color(0xFFF5F6F9),
-                // const Color.fromARGB(255, 210, 212, 205),
                 child: Column(
                   children: [
                     ListTile(
@@ -216,10 +190,6 @@ class Settingss extends StatelessWidget {
                         width: 22,
                         height: 37,
                       ),
-                      // Icon(
-                      //   Icons.language,
-                      //   color: Color.fromARGB(255, 246, 113, 103),
-                      // ),
                       title: Text(
                         'About',
                         style: GoogleFonts.abhayaLibre(
@@ -236,12 +206,6 @@ class Settingss extends StatelessWidget {
                   ],
                 ),
               ),
-              //   onTap: () => Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => const Notificationn(),
-              //     ),
-              //   ),
             ),
           ),
           Padding(
@@ -254,7 +218,6 @@ class Settingss extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 color: const Color(0xFFF5F6F9),
-                // const Color.fromARGB(255, 210, 212, 205),
                 child: Column(
                   children: [
                     ListTile(
@@ -278,12 +241,6 @@ class Settingss extends StatelessWidget {
                   ],
                 ),
               ),
-              //   onTap: () => Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => const Notificationn(),
-              //     ),
-              //   ),
             ),
           ),
         ],
