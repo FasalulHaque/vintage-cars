@@ -7,7 +7,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:vintagecars/drawer/view/pages/booking_view.dart';
+import 'package:vintagecars/drawer/view/pages/feedback.dart';
 import 'package:vintagecars/drawer/view/pages/settings.dart';
+
+import '../../login_page/view/login.dart';
 
 class DrawerScreen extends StatelessWidget {
   DrawerScreen({
@@ -182,7 +185,14 @@ class DrawerScreen extends StatelessWidget {
                     'Feedback',
                     style: GoogleFonts.adamina(color: Colors.black),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<dynamic>(
+                        builder: (context) => const FeedbackScreen(),
+                      ),
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 9,
@@ -193,7 +203,50 @@ class DrawerScreen extends StatelessWidget {
                     'Logout',
                     style: GoogleFonts.adamina(color: Colors.black),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text(
+                              'Alert!!',
+                              style: GoogleFonts.acme(),
+                            ),
+                            content: Text(
+                              'Are you sure!!!!!',
+                              style: GoogleFonts.abhayaLibre(
+                                fontSize: 19,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  'Cancel',
+                                  style: GoogleFonts.aldrich(),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute<dynamic>(
+                                      builder: (context) => LoginScreen(),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  'Logout',
+                                  style: GoogleFonts.aldrich(),
+                                ),
+                              ),
+                            ],
+                          );
+                        },);
+                  },
                 ),
               ],
             );

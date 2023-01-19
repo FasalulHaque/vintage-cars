@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vintagecars/login_page/login.dart';
 
 class Settingss extends StatelessWidget {
   const Settingss({super.key});
@@ -211,6 +212,50 @@ class Settingss extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: GestureDetector(
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text(
+                          'Alert!!',
+                          style: GoogleFonts.acme(),
+                        ),
+                        content: Text(
+                          'Are you sure!!!!!',
+                          style: GoogleFonts.abhayaLibre(
+                            fontSize: 19,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              'Cancel',
+                              style: GoogleFonts.aldrich(),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute<dynamic>(
+                                  builder: (context) => LoginScreen(),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              'Logout',
+                              style: GoogleFonts.aldrich(),
+                            ),
+                          ),
+                        ],
+                      );
+                    });
+              },
               child: Card(
                 shadowColor: Colors.redAccent,
                 elevation: 0,

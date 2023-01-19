@@ -1,19 +1,27 @@
 import 'dart:ui';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vintagecars/electric_details/view/bookin_electric.dart';
 import 'package:vintagecars/electric_details/view/widgets/featured_Ecard.dart';
 
-class ElectricDetails extends StatelessWidget {
+class ElectricDetails extends StatefulWidget {
   ElectricDetails({super.key, required this.electricAxis});
 
   QueryDocumentSnapshot<Object?> electricAxis;
 
   @override
+  State<ElectricDetails> createState() => _ElectricDetailsState();
+}
+
+class _ElectricDetailsState extends State<ElectricDetails> {
+  @override
   Widget build(BuildContext context) {
+    final images = widget.electricAxis['cars_imags'] as List;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -42,15 +50,46 @@ class ElectricDetails extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           children: [
+            SizedBox(
+              height: 10,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 310, top: 10),
+                child: RatingBar.builder(
+                  itemSize: 20,
+                  initialRating: 3,
+                  minRating: 1,
+                  allowHalfRating: true,
+                  itemCount: 3,
+                  itemBuilder: (context, _) => const Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                  onRatingUpdate: (rating) {},
+                ),
+              ),
+            ),
             Container(
               margin: const EdgeInsets.only(
                 top: 20,
               ),
-              child: Image.network(
-                electricAxis['cars_image'].toString(),
-                fit: BoxFit.cover,
-                height: 230,
-                width: 230,
+              child: CarouselSlider.builder(
+                options: CarouselOptions(),
+                itemCount: images.length,
+                itemBuilder: (
+                  BuildContext context,
+                  int itemIndex,
+                  int pageViewIndex,
+                ) =>
+                    Container(
+                  height: 600,
+                  width: 260,
+                  child: Card(
+                    child: Image.network(
+                      images[itemIndex].toString(),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
               ),
             ),
             Padding(
@@ -59,7 +98,7 @@ class ElectricDetails extends StatelessWidget {
                 top: 13,
               ),
               child: Text(
-                electricAxis['cars_name'].toString(),
+                widget.electricAxis['cars_name'].toString(),
                 style: GoogleFonts.actor(
                   fontSize: 28,
                   fontWeight: FontWeight.w300,
@@ -103,7 +142,7 @@ class ElectricDetails extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          electricAxis['cars_price'].toString(),
+                          widget.electricAxis['cars_price'].toString(),
                           style: GoogleFonts.aBeeZee(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
@@ -168,49 +207,49 @@ class ElectricDetails extends StatelessWidget {
               children: <Widget>[
                 FeturedCard(
                   text: 'Top Speed',
-                  value: electricAxis['top_speed'].toString(),
+                  value: widget.electricAxis['top_speed'].toString(),
                   image: Image.asset(
                     'assets/image/download__1_-removebg-preview.png',
                   ),
                 ),
                 FeturedCard(
                   text: 'Fuel Type',
-                  value: electricAxis['fuel_type'].toString(),
+                  value: widget.electricAxis['fuel_type'].toString(),
                   image: Image.asset(
                     'assets/image/images-removebg-preview (1).png',
                   ),
                 ),
                 FeturedCard(
                   text: 'Transmission',
-                  value: electricAxis['transmission'].toString(),
+                  value: widget.electricAxis['transmission'].toString(),
                   image: Image.asset(
                     'assets/image/istockphoto-466542086-612x612-removebg-preview.png',
                   ),
                 ),
                 FeturedCard(
                   text: 'Seating',
-                  value: electricAxis['seating_capacity'].toString(),
+                  value: widget.electricAxis['seating_capacity'].toString(),
                   image: Image.asset(
                     'assets/image/number-seats-grey-removebg-preview.png',
                   ),
                 ),
                 FeturedCard(
                   text: 'Battery',
-                  value: electricAxis['battery_capacity'].toString(),
+                  value: widget.electricAxis['battery_capacity'].toString(),
                   image: Image.asset(
                     'assets/image/power-battery-2195871-1887280-removebg-preview.png',
                   ),
                 ),
                 FeturedCard(
                   text: 'Dr Range',
-                  value: electricAxis['driving_range'].toString(),
+                  value: widget.electricAxis['driving_range'].toString(),
                   image: Image.asset(
                     'assets/image/rhfg-removebg-preview.png',
                   ),
                 ),
                 FeturedCard(
                   text: 'Safety',
-                  value: electricAxis['safety'].toString(),
+                  value: widget.electricAxis['safety'].toString(),
                   image: Image.asset(
                     'assets/image/4669525-removebg-preview.png',
                   ),
@@ -223,7 +262,7 @@ class ElectricDetails extends StatelessWidget {
                   context,
                   MaterialPageRoute<dynamic>(
                     builder: (context) => BookingElectric(
-                      book: electricAxis,
+                      book: widget.electricAxis,
                     ),
                   ),
                 );
@@ -271,7 +310,7 @@ class ElectricDetails extends StatelessWidget {
 
   Container colorDot(Color color) {
     return Container(
-      margin: EdgeInsets.all(3),
+      margin: const EdgeInsets.all(3),
       height: 31,
       width: 31,
       decoration: BoxDecoration(

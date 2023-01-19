@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vintagecars/booking/booking.dart';
 
@@ -47,13 +48,7 @@ class _BookingCarsState extends State<BookingCars> {
                 builder: (context) => const Dashboard(),
               ),
             );
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text(
-                  'bokked',
-                ),
-              ),
-            );
+            Fluttertoast.showToast(msg: 'Booking Confirmed');
           } else if (state is BookingAddFiled) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -260,7 +255,7 @@ class _BookingCarsState extends State<BookingCars> {
                       vertical: 18,
                       horizontal: 10,
                     ),
-                    labelText: 'Your Name',
+                    labelText: 'Your Name..',
                     labelStyle: GoogleFonts.abel(),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -283,7 +278,7 @@ class _BookingCarsState extends State<BookingCars> {
                       vertical: 18,
                       horizontal: 10,
                     ),
-                    labelText: 'Your Place',
+                    labelText: 'Your Place..',
                     labelStyle: GoogleFonts.abel(),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -307,7 +302,7 @@ class _BookingCarsState extends State<BookingCars> {
                       vertical: 18,
                       horizontal: 10,
                     ),
-                    labelText: 'Contact Number',
+                    labelText: 'Contact Number..',
                     labelStyle: GoogleFonts.abel(),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -338,6 +333,20 @@ class _BookingCarsState extends State<BookingCars> {
                   namecontroller.clear();
                   placecontroller.clear();
                   numbercontroller.clear();
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: Text(
+                          'Booking Successfuly',
+                          style: GoogleFonts.abhayaLibre(
+                            fontSize: 21,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      );
+                    },
+                  );
                 },
                 child: Container(
                   margin: const EdgeInsets.only(top: 47, right: 50, left: 50),

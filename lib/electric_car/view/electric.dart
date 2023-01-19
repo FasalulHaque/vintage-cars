@@ -1,17 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:vintagecars/electric_details/view/electric_details.dart';
 
 class ElectricCar extends StatelessWidget {
-  ElectricCar({super.key});
+  ElectricCar({
+    super.key,
+  });
 
   CollectionReference addCars = FirebaseFirestore.instance.collection(
     'Electriccar_collection',
   );
+  TextEditingController searchController = TextEditingController();
 
   final FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -24,6 +25,7 @@ class ElectricCar extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(14),
             child: TextField(
+              controller: searchController,
               style: GoogleFonts.abel(),
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(
@@ -31,8 +33,9 @@ class ElectricCar extends StatelessWidget {
                   horizontal: 15,
                 ),
                 hintText: 'Search',
-                suffixIcon: const Icon(
-                  Icons.search,
+                suffixIcon: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.search),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
@@ -40,9 +43,12 @@ class ElectricCar extends StatelessWidget {
               ),
             ),
           ),
-          StreamBuilder(
+          StreamBuilder<QuerySnapshot<Object?>>(
             stream: addCars.snapshots(),
-            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            builder: (
+              BuildContext context,
+              AsyncSnapshot<QuerySnapshot<Object?>> snapshot,
+            ) {
               if (snapshot.hasData) {
                 //print(snapshot.data!.docs);
                 final caritems = snapshot.data!.docs;
@@ -92,7 +98,7 @@ class ElectricCar extends StatelessWidget {
                                   height: 30,
                                 ),
                                 Image.network(
-                                  caritems[index]['cars_image'].toString(),
+                                  caritems[index]['cars_imags'][0].toString(),
                                   height: 100,
                                   width: 200,
                                   fit: BoxFit.cover,
@@ -114,7 +120,6 @@ class ElectricCar extends StatelessWidget {
                                       Icons.currency_rupee,
                                       size: 20,
                                     ),
-                                    
                                     Text(
                                       caritems[index]['cars_price'].toString(),
                                       style: GoogleFonts.andadaPro(),

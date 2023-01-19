@@ -37,9 +37,12 @@ class UsedCar extends StatelessWidget {
               ),
             ),
           ),
-          StreamBuilder(
+          StreamBuilder<QuerySnapshot<Object?>>(
             stream: usedcar.snapshots(),
-            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            builder: (
+              BuildContext context,
+              AsyncSnapshot<QuerySnapshot<Object?>> snapshot,
+            ) {
               if (snapshot.hasData) {
                 final useditems = snapshot.data!.docs;
                 return SingleChildScrollView(
@@ -89,7 +92,8 @@ class UsedCar extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(right: 8),
                                   child: Image.network(
-                                    useditems[index]['cars_image'].toString(),
+                                    useditems[index]['cars_image'][0]
+                                        .toString(),
                                     height: 100,
                                     width: 200,
 

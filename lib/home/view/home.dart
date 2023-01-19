@@ -14,12 +14,14 @@ class HomeScreen extends StatelessWidget {
         title: Padding(
           padding: const EdgeInsets.only(left: 82),
           child: Text(
+            
             'Electric Car',
+            
             style: GoogleFonts.abel(color: Colors.black),
           ),
         ),
       ),
-      body: Center(
+      body: const Center(
         child: Text('data'),
       ),
     );

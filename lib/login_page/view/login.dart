@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vintagecars/dashboard/view/dashboard.dart';
 import 'package:vintagecars/login_page/bloc/login_bloc.dart';
@@ -39,6 +40,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 builder: (context) => const Dashboard(),
               ),
             );
+            // Fluttertoast.showToast(
+            //   msg: 'weuwwejwen',
+            //   toastLength: Toast.LENGTH_SHORT,
+            //   gravity: ToastGravity.CENTER,
+            //   timeInSecForIosWeb: 1,
+            //   backgroundColor: Colors.red,
+            //   textColor: Colors.white,
+            //   fontSize: 16.0,
+            // );
           } else if (state is LoginFailed) {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(state.message)));

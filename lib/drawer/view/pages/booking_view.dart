@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BookingView extends StatelessWidget {
@@ -56,6 +57,25 @@ class BookingView extends StatelessWidget {
                   width: 40,
                   child: Column(
                     children: [
+                      SizedBox(
+                        height: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 270, top: 20),
+                          child: RatingBar.builder(
+                            itemSize: 18,
+                            initialRating: 3,
+                            minRating: 1,
+                            // direction: Axis.horizontal,
+                            allowHalfRating: true,
+                            itemCount: 3,
+                            itemBuilder: (context, _) => const Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            onRatingUpdate: (rating) {},
+                          ),
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(right: 140, top: 6),
                         child: Image.network(

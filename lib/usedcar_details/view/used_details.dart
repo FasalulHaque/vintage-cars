@@ -1,15 +1,23 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vintagecars/booking/view/booking.dart';
 import 'package:vintagecars/usedcar_details/view/featured_Uscard.dart';
 
-class UsedDetails extends StatelessWidget {
+class UsedDetails extends StatefulWidget {
   UsedDetails({super.key, required this.usedcAxis});
   QueryDocumentSnapshot<Object?> usedcAxis;
 
   @override
+  State<UsedDetails> createState() => _UsedDetailsState();
+}
+
+class _UsedDetailsState extends State<UsedDetails> {
+  @override
   Widget build(BuildContext context) {
+    final images = widget.usedcAxis['cars_image'] as List;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -38,15 +46,45 @@ class UsedDetails extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           children: [
+            SizedBox(
+              height: 10,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 310, top: 10),
+                child: RatingBar.builder(
+                  itemSize: 20,
+                  initialRating: 3,
+                  minRating: 1,
+                  // direction: Axis.horizontal,
+                  allowHalfRating: true,
+                  itemCount: 3,
+                  itemBuilder: (context, _) => const Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                  onRatingUpdate: (rating) {},
+                ),
+              ),
+            ),
             Container(
               margin: const EdgeInsets.only(
                 top: 20,
               ),
-              child: Image.network(
-                usedcAxis['cars_image'].toString(),
-                fit: BoxFit.cover,
-                height: 230,
-                width: 230,
+              child: CarouselSlider.builder(
+                options: CarouselOptions(),
+                itemCount: images.length,
+                itemBuilder: (
+                  BuildContext context,
+                  int itemIndex,
+                  int pageViewIndex,
+                ) =>
+                    Container(
+                  height: 600,
+                  width: 200,
+                  child: Image.network(
+                    images[itemIndex].toString(),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
             Padding(
@@ -55,7 +93,7 @@ class UsedDetails extends StatelessWidget {
                 top: 13,
               ),
               child: Text(
-                usedcAxis['cars_name'].toString(),
+                widget.usedcAxis['cars_name'].toString(),
                 style: GoogleFonts.actor(
                   fontSize: 28,
                   fontWeight: FontWeight.w300,
@@ -99,7 +137,7 @@ class UsedDetails extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          usedcAxis['cars_price'].toString(),
+                          widget.usedcAxis['cars_price'].toString(),
                           style: GoogleFonts.aBeeZee(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
@@ -164,70 +202,70 @@ class UsedDetails extends StatelessWidget {
               children: <Widget>[
                 FeturedUsedCard(
                   text: 'Top Speed',
-                  value: usedcAxis['max_power'].toString(),
+                  value: widget.usedcAxis['max_power'].toString(),
                   image: Image.asset(
                     'assets/image/download__1_-removebg-preview.png',
                   ),
                 ),
                 FeturedUsedCard(
                   text: 'Fuel Type',
-                  value: usedcAxis['fuel_type'].toString(),
+                  value: widget.usedcAxis['fuel_type'].toString(),
                   image: Image.asset(
                     'assets/image/images-removebg-preview (1).png',
                   ),
                 ),
                 FeturedUsedCard(
                   text: 'Transmission',
-                  value: usedcAxis['transmission'].toString(),
+                  value: widget.usedcAxis['transmission'].toString(),
                   image: Image.asset(
                     'assets/image/istockphoto-466542086-612x612-removebg-preview.png',
                   ),
                 ),
                 FeturedUsedCard(
                   text: 'Seating',
-                  value: usedcAxis['seating'].toString(),
+                  value: widget.usedcAxis['seating'].toString(),
                   image: Image.asset(
                     'assets/image/number-seats-grey-removebg-preview.png',
                   ),
                 ),
                 FeturedUsedCard(
                   text: 'Registration',
-                  value: usedcAxis['registration'].toString(),
+                  value: widget.usedcAxis['registration'].toString(),
                   image: Image.asset(
                     'assets/image/new_plates-removebg-preview.png',
                   ),
                 ),
                 FeturedUsedCard(
                   text: 'Mileage  ',
-                  value: usedcAxis['mileage'].toString(),
+                  value: widget.usedcAxis['mileage'].toString(),
                   image: Image.asset(
                     'assets/image/fuel-gauge-icon-meter-full-tank-car-vebg-preview.png',
                   ),
                 ),
                 FeturedUsedCard(
                   text: 'Insurance  ',
-                  value: usedcAxis['Insurance'].toString(),
+                  value: widget.usedcAxis['Insurance'].toString(),
                   image: Image.asset(
                     'assets/image/4669525-removebg-preview.png',
                   ),
                 ),
                 FeturedUsedCard(
                   text: 'Model  ',
-                  value: usedcAxis['model'].toString(),
+                  value: widget.usedcAxis['model'].toString(),
                   image: Image.asset(
                     'assets/image/red-sedan-car-icon-in-flat-design-vector-16737556-removebg-preview.png',
                   ),
                 ),
                 FeturedUsedCard(
                   text: 'Kilometers Driven',
-                  value: usedcAxis['kilometers_driven'].toString(),
+                  value: widget.usedcAxis['kilometers_driven'].toString(),
                   image: Image.asset(
                     'assets/image/speedometer-icon-simple-style-isolated-vector-illustration-auto-spare-parts-symbol-81638125-removebg-preview.png',
                   ),
                 ),
                 FeturedUsedCard(
                   text: 'regist In',
-                  value: usedcAxis['registration_in'].toString(),
+                  value: widget.usedcAxis['registration_in'].toString(),
                   image: const Icon(Icons.app_registration),
                 ),
               ],
@@ -237,7 +275,7 @@ class UsedDetails extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute<dynamic>(
-                    builder: (context) => BookingCars(book: usedcAxis),
+                    builder: (context) => BookingCars(book: widget.usedcAxis),
                   ),
                 );
               },
